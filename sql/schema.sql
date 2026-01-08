@@ -1,8 +1,10 @@
--- Fact table
-CREATE TABLE fact_cases (
-    case_id VARCHAR PRIMARY KEY,
+-- =========================
+-- Fact table: Service Requests
+-- =========================
+CREATE TABLE fact_service_requests (
+    request_id VARCHAR PRIMARY KEY,
     created_date DATE NOT NULL,
-    closed_date DATE,
+    completed_date DATE,
     status VARCHAR,
     is_duplicate BOOLEAN,
     resolution_days INTEGER,
@@ -10,7 +12,9 @@ CREATE TABLE fact_cases (
     geography_id INTEGER
 );
 
+-- =========================
 -- Date dimension
+-- =========================
 CREATE TABLE dim_date (
     date_id DATE PRIMARY KEY,
     year INTEGER,
@@ -18,15 +22,22 @@ CREATE TABLE dim_date (
     month_name VARCHAR
 );
 
+-- =========================
 -- Request type dimension
+-- =========================
 CREATE TABLE dim_request_type (
     request_type_id INTEGER PRIMARY KEY,
     request_type VARCHAR
 );
 
+-- =========================
 -- Geography dimension
+-- =========================
 CREATE TABLE dim_geography (
     geography_id INTEGER PRIMARY KEY,
     ward INTEGER,
-    community_area VARCHAR
+    community_area INTEGER,
+    zip_code INTEGER,
+    latitude FLOAT,
+    longitude FLOAT
 );
